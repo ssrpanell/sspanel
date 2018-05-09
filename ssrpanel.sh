@@ -24,12 +24,12 @@ function install_ssrpanel(){
 	echo "$MY_PING $MY" >> ping.pl
 	fileinfo=`sort -V ping.pl|sed -n '1p'|awk '{print $2}'`
 	if [ "$fileinfo" == "$GIT" ];then
-		fileinfo='https://raw.githubusercontent.com/echo-marisn/ssrpanel-one-click-script/master/fileinfo.zip'
+		fileinfo='https://raw.githubusercontent.com/marisn2017/ssrpanel/master/fileinfo.zip'
 	else
 		fileinfo='https://gitee.com/marisn/ssrpanel-new/raw/master/fileinfo.zip'
 	fi
 	rm -f ping.pl	
-	 wget -c --no-check-certificate https://raw.githubusercontent.com/echo-marisn/ss-panel-v3-mod_UIChanges-one-click-script/master/lnmp1.4.zip && unzip lnmp1.4.zip && rm -rf lnmp1.4.zip && cd lnmp1.4 && chmod +x install.sh && ./install.sh
+	 wget -c --no-check-certificate https://raw.githubusercontent.com/marisn2017/ssrpanel/master/lnmp1.4.zip && unzip lnmp1.4.zip && rm -rf lnmp1.4.zip && cd lnmp1.4 && chmod +x install.sh && ./install.sh
 	clear
 	#安装fileinfo必须组件
 	cd /root && wget --no-check-certificate $fileinfo
@@ -50,10 +50,10 @@ function install_ssrpanel(){
 	wget -c --no-check-certificate "https://github.com/ssrpanel/SSRPanel/archive/${ssrpanel_new_ver}.tar.gz"
 	tar zxvf "${ssrpanel_new_ver}.tar.gz" && cd SSRPanel-* && mv * .[^.]* ..&& cd /home/wwwroot/default && rm -rf "${ssrpanel_new_ver}.tar.gz"
 	#替换数据库配置
-	wget -N -P /home/wwwroot/default/config/ https://raw.githubusercontent.com/echo-marisn/ssrpanel-one-click-script/master/app.php
-	wget -N -P /home/wwwroot/default/config/ https://raw.githubusercontent.com/echo-marisn/ssrpanel-one-click-script/master/database.php
-	wget -N -P /usr/local/php/etc/ https://raw.githubusercontent.com/echo-marisn/ssrpanel-one-click-script/master/php.ini
-	wget -N -P /usr/local/nginx/conf/ https://raw.githubusercontent.com/echo-marisn/ssrpanel-one-click-script/master/nginx.conf
+	wget -N -P /home/wwwroot/default/config/ https://raw.githubusercontent.com/marisn2017/ssrpanel/master/app.php
+	wget -N -P /home/wwwroot/default/config/ https://raw.githubusercontent.com/marisn2017/ssrpanel/master/database.php
+	wget -N -P /usr/local/php/etc/ https://raw.githubusercontent.com/marisn2017/ssrpanel/master/php.ini
+	wget -N -P /usr/local/nginx/conf/ https://raw.githubusercontent.com/marisn2017/ssrpanel/master/nginx.conf
 	service nginx restart
 	#设置数据库
 	#mysql -uroot -proot -e"create database ssrpanel;" 
@@ -100,7 +100,7 @@ EOF
 	echo "# One click Install ssrpanel successed                             #"
 	echo "# Author: marisn          Ssrpanel:ssrpanel                        #"
 	echo "# Blog: http://blog.67cc.cn/                                       #"
-	echo "# Github: https://github.com/echo-marisn/ssrpanel-one-click-script #"
+	echo "# Github: https://github.com/marisn2017/ssrpanel                   #"
 	echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
 }
 function install_log(){
@@ -176,14 +176,14 @@ function install_ssr(){
 	yum -y install python-setuptools
 	easy_install supervisor
     cd /root
-	wget https://raw.githubusercontent.com/echo-marisn/ssrpanel-one-click-script/master/shadowsocksr.zip
+	wget https://raw.githubusercontent.com/marisn2017/ssrpanel/master/shadowsocksr.zip
 	unzip shadowsocksr.zip
 	cd shadowsocksr
 	./initcfg.sh
 	chmod 777 *
-	wget -N -P /root/shadowsocksr/ https://raw.githubusercontent.com/echo-marisn/ssrpanel-one-click-script/master/user-config.json
-	wget -N -P /root/shadowsocksr/ https://raw.githubusercontent.com/echo-marisn/ssrpanel-one-click-script/master/userapiconfig.py
-	wget -N -P /root/shadowsocksr/ https://raw.githubusercontent.com/echo-marisn/ssrpanel-one-click-script/master/usermysql.json
+	wget -N -P /root/shadowsocksr/ https://raw.githubusercontent.com/marisn2017/ssrpanel/master/user-config.json
+	wget -N -P /root/shadowsocksr/ https://raw.githubusercontent.com/marisn2017/ssrpanel/master/userapiconfig.py
+	wget -N -P /root/shadowsocksr/ https://raw.githubusercontent.com/marisn2017/ssrpanel/master/usermysql.json
 	sed -i "s#Userip#${Userip}#" /root/shadowsocksr/usermysql.json
 	sed -i "s#Dbuser#${Dbuser}#" /root/shadowsocksr/usermysql.json
 	sed -i "s#Dbport#${Dbport}#" /root/shadowsocksr/usermysql.json
@@ -247,7 +247,7 @@ function install_node(){
 	echo "# Restart the envoy's point of entry into force...                 #"
 	echo "# Author: marisn          Ssrpanel:ssrpanel                        #"
 	echo "# Blog: http://blog.67cc.cn/                                       #"
-	echo "# Github: https://github.com/echo-marisn/ssrpanel-one-click-script #"
+	echo "# Github: https://github.com/marisn2017/ssrpanel                   #"
 	echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
 	reboot
 }
@@ -263,7 +263,7 @@ ulimit -c 0
 rm -rf ssrpanel*
 clear
 echo
-Realip=`curl -s http://tools.67cc.cn/Realip/ip.php`;
+Realip=`curl -s http://members.3322.org/dyndns/getip`;
 pass='blog.67cc.cn';
 echo -e "Your IP address is: $Realip "
 echo -e "Please verify the blog address: [\033[32m $pass \033[0m] "
