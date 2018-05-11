@@ -26,13 +26,13 @@ function install_ssrpanel(){
 	if [ "$fileinfo" == "$GIT" ];then
 		fileinfo='https://raw.githubusercontent.com/marisn2017/ssrpanel/master/fileinfo.zip'
 	else
-		fileinfo='https://gitee.com/marisn/ssrpanel-new/raw/master/fileinfo.zip'
+		fileinfo='https://gitee.com/marisn/ssrpanel-new/raw/master/fileinfo.zip' #暂时删除码云的库
 	fi
 	rm -f ping.pl	
 	 wget -c --no-check-certificate https://raw.githubusercontent.com/marisn2017/ssrpanel/master/lnmp1.4.zip && unzip lnmp1.4.zip && rm -rf lnmp1.4.zip && cd lnmp1.4 && chmod +x install.sh && ./install.sh
 	clear
 	#安装fileinfo必须组件
-	cd /root && wget --no-check-certificate $fileinfo
+	cd /root && wget --no-check-certificate https://raw.githubusercontent.com/marisn2017/ssrpanel/master/fileinfo.zip
 	File="/root/fileinfo.zip"
     if [ ! -f "$File" ]; then  
     echo "fileinfo.zip download be fail,please check the /root/fileinfo.zip"
