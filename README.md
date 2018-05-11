@@ -26,6 +26,7 @@
 21.有赞云支付
 22.开放API，方便自行定制改造客户端
 
+
 一键脚本：
 
 ```yum install screen wget -y &&screen -S ssrpanel wget --no-check-certificate https://raw.githubusercontent.com/marisn2017/ssrpanel/master/ssrpanel.sh&&chmod +x ssrpanel.sh&&bash ssrpanel.sh```
