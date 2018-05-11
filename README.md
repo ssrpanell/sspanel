@@ -29,7 +29,8 @@
 
 一键脚本：
 
-```yum install screen wget -y &&screen -S ssrpanel wget --no-check-certificate https://raw.githubusercontent.com/marisn2017/ssrpanel/master/ssrpanel.sh&&chmod +x ssrpanel.sh&&bash ssrpanel.sh```
+```yum install screen wget -y &&screen -S ssrpanel```
+```wget --no-check-certificate https://raw.githubusercontent.com/marisn2017/ssrpanel/master/ssrpanel.sh&&chmod +x ssrpanel.sh&&bash ssrpanel.sh```
 
 更多问题访问：<a href="https://blog.67cc.cn/">https://blog.67cc.cn/</a>
 
