@@ -34,5 +34,7 @@
 
 更多问题访问：<a href="https://blog.67cc.cn/">https://blog.67cc.cn/</a>
 
+WIKI:<a href="https://github.com/marisn2017/ssrpanel/wiki>https://github.com/marisn2017/ssrpanel/wiki</a>
+
 <p>打赏请留言，需要匿名的请备注哦~</p> <p>再次感谢打赏~</p> <p><img src="https://cdn.67cc.cn/20171149300097257160.png" alt="打赏捐赠" /></p>
 
