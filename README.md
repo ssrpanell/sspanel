@@ -27,14 +27,14 @@
 22.开放API，方便自行定制改造客户端<br>
 <br>
 
-一键脚本【仅支持Centos 7.x 64位系统】：
+一键脚本【仅支持Centos 7.x 64位系统】：<br>
 
 ```yum install screen wget -y &&screen -S ssrpanel```<br>
 ```wget --no-check-certificate https://raw.githubusercontent.com/marisn2017/ssrpanel/master/ssrpanel.sh&&chmod +x ssrpanel.sh&&bash ssrpanel.sh```
 
-更多问题访问：<a href="https://blog.67cc.cn/">https://blog.67cc.cn/</a>
+更多问题访问：<a href="https://blog.67cc.cn/">https://blog.67cc.cn/</a><br>
 
-WIKI:<a href="https://github.com/marisn2017/ssrpanel/wiki>https://github.com/marisn2017/ssrpanel/wiki</a>
+WIKI:<a href="https://github.com/marisn2017/ssrpanel/wiki">https://github.com/marisn2017/ssrpanel/wiki</a><br>
 
-<p>打赏请留言，需要匿名的请备注哦~</p> <p>再次感谢打赏~</p> <p><img src="https://cdn.67cc.cn/20171149300097257160.png" alt="打赏捐赠" /></p>
+<br><p>打赏请留言，需要匿名的请备注哦~</p> <p>再次感谢打赏~</p> <p><img src="https://cdn.67cc.cn/20171149300097257160.png" alt="打赏捐赠" /></p>
 
