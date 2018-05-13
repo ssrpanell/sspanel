@@ -3,6 +3,9 @@
 #Author: marisn
 #Blog: blog.67cc.cn
 #更新日志：
+#2018-5-13 11:31:59
+#增加系统检测，避免错误
+
 #2018-5-7 13:19:52
 #修复CyMySQL
 
@@ -12,6 +15,31 @@
 #3.修复搭建失败
 #4.数据库采用端口888访问
 [ $(id -u) != "0" ] && { echo "Error: You must be root to run this script"; exit 1; }
+function check_system(){
+	if [[ -f /etc/redhat-release ]]; then
+		release="centos"
+	elif cat /etc/issue | grep -q -E -i "debian"; then
+		release="debian"
+	elif cat /etc/issue | grep -q -E -i "ubuntu"; then
+		release="ubuntu"
+	elif cat /etc/issue | grep -q -E -i "centos|red hat|redhat"; then
+		release="centos"
+	elif cat /proc/version | grep -q -E -i "debian"; then
+		release="debian"
+	elif cat /proc/version | grep -q -E -i "ubuntu"; then
+		release="ubuntu"
+	elif cat /proc/version | grep -q -E -i "centos|red hat|redhat"; then
+		release="centos"
+    fi
+	bit=`uname -m`
+	if [[ ${release} = "centos" ]] && [[ ${bit} == "x86_64" ]]; then
+	echo -e "你的系统为[${release} ${bit}],检测\033[32m 可以 \033[0m搭建。"
+	else 
+	echo -e "你的系统为[${release} ${bit}],检测\033[31m 不可以 \033[0m搭建。"
+	echo -e "\033[31m 正在退出脚本... \033[0m"
+	exit 0;
+	fi
+}
 function install_ssrpanel(){
 	yum -y remove httpd
 	yum install -y unzip zip git
@@ -262,18 +290,8 @@ export PATH
 ulimit -c 0
 rm -rf ssrpanel*
 clear
-echo
-Realip=`curl -s http://members.3322.org/dyndns/getip`;
-pass='blog.67cc.cn';
-echo -e "Your IP address is: $Realip "
-echo -e "Please verify the blog address: [\033[32m $pass \033[0m] "
-read inputPass
-if [ "$inputPass" != "$pass" ];then
-    #Site validation
-     echo -e "\033[31mI'm sorry for the input error.\033[0m";
-     exit 1;
-fi;
-clear
+check_system
+sleep 2
 echo "#############################################################################"
 echo "#Welcome to use One click Install ssrpanel and nodes scripts                #"
 echo "#Please select the script you want to build：                               #"
