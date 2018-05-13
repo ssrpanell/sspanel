@@ -14,7 +14,7 @@
 #2.优化lnmp的搭建
 #3.修复搭建失败
 #4.数据库采用端口888访问
-[ $(id -u) != "0" ] && { echo "错误: 您必须以root用户运行此脚本"; exit 1; }
+[ $(id -u) != "0" ] && { echo "Error: You must be root to run this script"; exit 1; }
 function check_system(){
 	if [[ -f /etc/redhat-release ]]; then
 		release="centos"
@@ -63,7 +63,7 @@ function install_ssrpanel(){
 	cd /root && wget --no-check-certificate $fileinfo
 	File="/root/fileinfo.zip"
     if [ ! -f "$File" ]; then  
-    echo "fileinfo组件下载失败，请检查/root/fileinfo.zip"
+    echo "fileinfo.zip download be fail,please check the /root/fileinfo.zip"
 	exit 0;
 	else
     unzip fileinfo.zip
@@ -134,39 +134,39 @@ EOF
 function install_log(){
     myFile="/root/shadowsocksr/ssserver.log"  
 	if [ ! -f "$myFile" ]; then  
-    echo "您的shadowsocksr环境未安装"
-	echo "请检查/root/shadowsocksr/ssserver.log是否存在"
+    echo "Your shadowsocksr backend is not installed"
+	echo "Please check the/root/shadowsocksr/ssserver log exists"
 	else
 	cd /home/wwwroot/default/storage/app/public
 	ln -S ssserver.log /root/shadowsocksr/ssserver.log
 	chown www:www ssserver.log
 	chmod 0777 /home/wwwroot/default/storage/app/public/ssserver.log
 	chmod 777 -R /home/wwwroot/default/storage/logs/
-	echo "日志分析（仅支持单机单节点） - 安装成功"
+	echo "Log analysis (currently supported only single-machine single node) - installation success"
     fi
 }
 function change_password(){
-	echo -e "\033[31m注意:必须正确填写数据库密码，否则只能手动修改。\033[0m"
-	read -p "请输入数据库密码(初始密码为root):" Default_password
+	echo -e "\033[31mNote: you must fill in the database password correctly or you can only modify it manually\033[0m"
+	read -p "Please enter the database password (the initial password is root):" Default_password
 	Default_password=${Default_password:-"root"}
-	read -p "请输入要设置的数据库密码:" Change_password
+	read -p "Please enter the database password to be set:" Change_password
 	Change_password=${Change_password:-"root"}
-	echo -e "\033[31m您设置的密码是:${Change_password}\033[0m"
+	echo -e "\033[31mThe password you set is:${Change_password}\033[0m"
 mysql -hlocalhost -uroot -p$Default_password --default-character-set=utf8<<EOF
 use mysql;
 update user set password=passworD("${Change_password}") where user='root';
 flush privileges;
 EOF
-	echo "开始在设置文件中替换数据库信息..."
+	echo "Start replacing the database information in the Settings file..."
 	myFile="/root/shadowsocksr/server.py"
     if [ ! -f "$myFile" ]; then  
     sed -i "s/'password' => '"${Default_password}"'/'password' => '"${Change_password}"'/g" /home/wwwroot/default/config/database.php
-	echo "数据库密码已完成，请记住。."
-	echo "您设置的密码是:${Change_password}"
+	echo "The database password is complete, please remember."
+	echo "Your database password is:${Change_password}"
 	else
 	sed -i 's/"password": "'${Default_password}'",/"password": "'${Change_password}'",/g' /root/shadowsocksr/usermysql.json
 	sed -i "s/'password' => '"${Default_password}"'/'password' => '"${Change_password}"'/g" /home/wwwroot/default/config/database.php
-	echo "重新启动配置以生效..."
+	echo "Restart the configuration to take effect..."
 	init 6
     fi
 
@@ -232,15 +232,15 @@ function install_node(){
     echo -e "\033[31m Add a node...\033[0m"
 	echo
 	sed -i '$a * hard nofile 512000\n* soft nofile 512000' /etc/security/limits.conf
-	[ $(id -u) != "0" ] && { echo "错误: 您必须以root用户运行此脚本"; exit 1; }
-	echo -e "如果你不知道，你可以直接回车。"
-	echo -e "如果连接失败，请检查数据库远程访问是否打开。"
-	read -p "请输入您的对接数据库IP(回车默认为本地IP地址):" Userip
-	read -p "请输入数据库名称(回车默认为ssrpanel):" Dbname
-	read -p "请输入数据库端口(回车默认为3306):" Dbport
-	read -p "请输入数据库帐户(回车默认为root):" Dbuser
-	read -p "请输入数据库密码(回车默认为root):" Dbpassword
-	read -p "请输入您的节点编号(回车默认为1):  " UserNODE_ID
+	[ $(id -u) != "0" ] && { echo "Error: You must be root to run this script"; exit 1; }
+	echo -e "You can go back to the car if you don't know"
+	echo -e "If the connection fails, check that the database remote access is open"
+	read -p "Please enter your docking database IP (enter default Local IP address) :" Userip
+	read -p "Please enter the database name (enter default ssrpanel):" Dbname
+	read -p "Please enter the database port (enter default 3306):" Dbport
+	read -p "Please enter the database account (enter default root):" Dbuser
+	read -p "Please enter your database password (enter default root):" Dbpassword
+	read -p "Please enter your node number (enter default 1):  " UserNODE_ID
 	IPAddress=`wget http://members.3322.org/dyndns/getip -O - -q ; echo`;
 	Userip=${Userip:-"${IPAddress}"}
 	Dbname=${Dbname:-"ssrpanel"}
@@ -271,11 +271,11 @@ function install_node(){
 	chmod 777 -R /home/wwwroot/default/storage/logs/
 	clear
 	echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
-	echo "#                    成功添加节点请登录到前端站点查看              #"
-	echo "#                     正在重新启动系统使节点生效……                 #"
-	echo "#              Author: marisn          Ssrpanel:ssrpanel           #"
-	echo "#              Blog: http://blog.67cc.cn/                          #"
-	echo "#              Github: https://github.com/marisn2017/ssrpanel      #"
+	echo "# Add success to the node and log on to the front site             #"
+	echo "# Restart the envoy's point of entry into force...                 #"
+	echo "# Author: marisn          Ssrpanel:ssrpanel                        #"
+	echo "# Blog: http://blog.67cc.cn/                                       #"
+	echo "# Github: https://github.com/marisn2017/ssrpanel                   #"
 	echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
 	reboot
 }
@@ -293,17 +293,17 @@ clear
 check_system
 sleep 2
 echo "#############################################################################"
-echo "#                      欢迎使用一键安装ssrpanel和节点脚本。                 #"
-echo "#请选择您想要搭建的脚本:                                                    #"
-echo "#1.  一键安装ssrpanel前端面板(不包括节点)                                   #"
-echo "#2.  一键安装ssrpanel节点(可单独搭建)                                       #"
-echo "#3.  一键搭建BBR加速                                                        #"
-echo "#4.  一键搭建锐速加速                                                       #"
-echo "#5.  ssrpanel官方升级脚本(可能没什么luan用)                                 #"
-echo "#6.  日志分析（仅支持单机单节点）                                           #" 
-echo "#7.  一键更改数据库密码(仅适用于已搭建前端)                                 #" 
-echo "#                                PS:建议请先搭建加速再搭建ssrpanel相关。    #"
-echo "#                                     此脚本仅适用于Centos 7. X 64位 系统   #"
+echo "#Welcome to use One click Install ssrpanel and nodes scripts                #"
+echo "#Please select the script you want to build：                               #"
+echo "#1.  One click Install ssrpanel                                             #"
+echo "#2.  One click Install ssrpanel nodes                                       #"
+echo "#3.  One click Install BBR                                                  #"
+echo "#4.  One click Install Serverspeeder                                        #"
+echo "#5.  Upgrade to the latest ssr-panel [official update script]               #"
+echo "#6.  Log analysis (currently only single node single node support)          #" 
+echo "#7.  One click change the Database password                                 #" 
+echo "#                      PS:Please build acceleration and build ssrpanel first#"
+echo "#                                     Apply to Centos 7. X system           #"
 echo "#############################################################################"
 echo
 read num
