@@ -124,11 +124,10 @@ EOF
 	lnmp restart
 	IPAddress=`wget http://members.3322.org/dyndns/getip -O - -q ; echo`;
 	echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
-	echo "# A key to build success, go to http://${IPAddress}~               #"
-	echo "# One click Install ssrpanel successed                             #"
-	echo "# Author: marisn          Ssrpanel:ssrpanel                        #"
-	echo "# Blog: http://blog.67cc.cn/                                       #"
-	echo "# Github: https://github.com/marisn2017/ssrpanel                   #"
+	echo "#    一键搭建前端面板完成，请访问http://${IPAddress}~ 查看         #"
+	echo "#         Author: marisn          Ssrpanel:ssrpanel                #"
+	echo "#         Blog: http://blog.67cc.cn/                               #"
+	echo "#         Github: https://github.com/marisn2017/ssrpanel           #"
 	echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
 }
 function install_log(){
