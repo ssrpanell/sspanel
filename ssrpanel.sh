@@ -217,11 +217,7 @@ function install_ssr(){
 	sed -i "s#Dbpassword#${Dbpassword}#" /root/shadowsocksr/usermysql.json
 	sed -i "s#Dbname#${Dbname}#" /root/shadowsocksr/usermysql.json
 	sed -i "s#UserNODE_ID#${UserNODE_ID}#" /root/shadowsocksr/usermysql.json
-	yum -y install lsof lrzsz
-	yum -y install python-devel
-	yum -y install libffi-devel
-	yum -y install openssl-devel
-	yum -y install iptables
+	yum -y install lsof lrzsz python-devel libffi-devel openssl-devel iptables
 	systemctl stop firewalld.service
 	systemctl disable firewalld.service
 }
